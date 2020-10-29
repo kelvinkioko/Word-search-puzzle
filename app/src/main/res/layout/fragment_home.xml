@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".ui.HomeFragment">
+
+    <TextView
+        android:textAppearance="?attr/textAppearanceCaption"
+        android:id="@+id/ratingMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:letterSpacing="0.03"
+        android:lineSpacingMultiplier="1.1"
+        android:text="Word search is a classic puzzle game designed to exercise your brain. Its available in 6 languages"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/hint_text"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp"
+        android:includeFontPadding="false"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintBottom_toTopOf="@+id/playButton" />
+
+    <ImageView
+        android:id="@+id/playButton"
+        style="@style/OutlinesButtonAppearance"
+        android:layout_width="150dp"
+        android:layout_height="76dp"
+        android:gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:scaleType="centerCrop"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_play_selector"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintBottom_toTopOf="@+id/leaderBoard"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/leaderBoard"
+        style="@style/OutlinesButtonAppearance"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="Leaderboard"
+        android:textSize="16sp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintEnd_toStartOf="@id/settings"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintBottom_toTopOf="@+id/rating"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/settings"
+        style="@style/AccentColoredButtonAppearance"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="Settings"
+        android:textSize="16sp"
+        android:textColor="@color/colorWhite"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/leaderBoard"
+        app:layout_constraintBottom_toTopOf="@+id/ratingShare"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/rating"
+        style="@style/OutlinesButtonAppearance"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="Rate app"
+        android:textSize="16sp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintEnd_toStartOf="@id/ratingShare"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintBottom_toTopOf="@+id/appVersion"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ratingShare"
+        style="@style/AccentColoredButtonAppearance"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="Share app"
+        android:textSize="16sp"
+        android:textColor="@color/colorWhite"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/rating"
+        app:layout_constraintBottom_toTopOf="@+id/appVersion"/>
+
+    <TextView
+        android:id="@+id/appVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

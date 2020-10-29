@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_nav_graph"
+    app:startDestination="@id/homeFragment"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.word.search.puzzle.play.ui.HomeFragment"
+        android:label="Home fragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/toSettingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/toGameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.word.search.puzzle.play.ui.game.GameFragment"
+        android:label="Game fragment"
+        tools:layout="@layout/fragment_game"/>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.word.search.puzzle.play.ui.settings.SettingsFragment"
+        android:label="Settings fragment"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/toLanguagesFragment"
+            app:destination="@id/languagesFragment" />
+        <action
+            android:id="@+id/toGridSizeFragment"
+            app:destination="@id/gridSizesFragment" />
+        <action
+            android:id="@+id/toWordCountFragment"
+            app:destination="@id/wordCountFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/languagesFragment"
+        android:name="com.word.search.puzzle.play.ui.settings.language.LanguagesFragment"
+        android:label="Languages fragment"
+        tools:layout="@layout/settings_preference_chooser_fragment"/>
+
+    <fragment
+        android:id="@+id/gridSizesFragment"
+        android:name="com.word.search.puzzle.play.ui.settings.gridsize.GridSizeFragment"
+        android:label="Grid sizes fragment"
+        tools:layout="@layout/settings_preference_chooser_fragment"/>
+
+    <fragment
+        android:id="@+id/wordCountFragment"
+        android:name="com.word.search.puzzle.play.ui.settings.wordcount.WordCountFragment"
+        android:label="Random word count fragment"
+        tools:layout="@layout/settings_preference_chooser_fragment"/>
+
+</navigation>

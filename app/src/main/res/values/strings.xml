@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Word search puzzle</string>
+
+    <string name="review_message">Please leave us a <u><b>positive rating &amp; review</b></u> on the <u><b>Play store</b></u>.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
