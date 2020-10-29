@@ -13,7 +13,8 @@ import com.word.search.puzzle.play.constants.PreferenceHandler
 import com.word.search.puzzle.play.database.WordSearchReader
 import com.word.search.puzzle.play.databinding.FragmentGameBinding
 import com.word.search.puzzle.play.util.viewBinding
-import java.util.*
+import java.util.Collections
+import java.util.Random
 import kotlin.math.min
 
 class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlightedListener {
@@ -165,7 +166,6 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
         }
         // if (word_list_label_group != null) word_list_label_group.startAnimation(anim)
     }
-
 
     private fun gameFinishAnimation() {
         var fadeOut = AlphaAnimation(1.0f, 0.0f)
@@ -324,7 +324,6 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
         }
         return score
     }
-
 
     private fun getEmptySpace(direction: Direction, row: Int, col: Int): Int {
         return when (direction) {

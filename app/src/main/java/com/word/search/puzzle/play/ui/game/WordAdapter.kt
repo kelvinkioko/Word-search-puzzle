@@ -39,7 +39,7 @@ class WordAdapter : RecyclerView.Adapter<WordAdapter.WordCountItemViewHolder>() 
     }
 
     inner class WordCountItemViewHolder(
-            private val binding: WordSearchItemBinding
+        private val binding: WordSearchItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(word: Word) {
             binding.apply {

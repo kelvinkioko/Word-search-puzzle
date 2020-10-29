@@ -2,7 +2,12 @@ package com.word.search.puzzle.play.ui.game
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
+import android.graphics.RectF
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -14,7 +19,7 @@ import android.widget.TextView
 import com.word.search.puzzle.play.R
 import com.word.search.puzzle.play.constants.PreferenceHandler
 import com.word.search.puzzle.play.ui.game.Direction.Companion.getDirection
-import java.util.*
+import java.util.Random
 import kotlin.math.floor
 import kotlin.math.hypot
 
@@ -38,7 +43,7 @@ class WSLayout : LinearLayout {
     private val delta: Float = (50.0 * density + 0.5).toFloat()
     private var gameStatus: GameStatus? = null
     private var onWordHighlightedListener: OnWordHighlightedListener? = null
-    private lateinit var preferenceHandler: PreferenceHandler
+    private var preferenceHandler: PreferenceHandler
 
     constructor(context: Context) : super(context) {
         preferenceHandler = PreferenceHandler(context.getSharedPreferences(PreferenceHandler.PREFS_FILE, Context.MODE_PRIVATE))
