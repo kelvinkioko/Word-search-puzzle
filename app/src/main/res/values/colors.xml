@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#f2f3f4</color>
-    <color name="colorPrimaryDark">#f2f3f4</color>
-    <color name="colorAccent">#2e95ec</color>
-    <color name="colorBackground">#f2f3f4</color>
+    <color name="colorPrimary">#ecf4f3</color>
+    <color name="colorPrimaryDark">#ecf4f3</color>
+    <color name="colorAccent">#00686f</color>
+    <color name="colorBackground">#ecf4f3</color>
+
+    <color name="colorSplash">#00686f</color>
 
     <color name="colorWhite">#ffffff</color>
 
@@ -14,7 +16,7 @@
 
     <color name="divider">#50aeb0a5</color>
 
-    <color name="statusBarColor">#2e95ec</color>
+    <color name="statusBarColor">#00686f</color>
 
     <!--    State colors    -->
     <color name="colorPositive">#38aba5</color>

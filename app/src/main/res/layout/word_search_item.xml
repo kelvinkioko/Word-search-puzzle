@@ -14,7 +14,6 @@
         android:textSize="12sp"
         tools:text="Terror"
         android:paddingVertical="8dp"
-        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

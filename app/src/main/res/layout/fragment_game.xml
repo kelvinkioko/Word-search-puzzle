@@ -8,31 +8,149 @@
     tools:context=".ui.game.GameFragment"
     android:background="@color/colorBackground">
 
+    <View
+        android:id="@+id/topBackground"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/ic_background"
+        app:layout_constraintTop_toTopOf="@+id/topBackground"
+        app:layout_constraintEnd_toEndOf="@+id/topBackground"
+        app:layout_constraintStart_toStartOf="@+id/topBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/topBackground" />
+
+    <TextView
+        android:textAppearance="?attr/textAppearanceHeadline4"
+        android:id="@+id/timer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:letterSpacing="0.03"
+        android:lineSpacingMultiplier="1.1"
+        android:textColor="@color/primary_text"
+        android:textColorHint="@color/hint_text"
+        android:includeFontPadding="false"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintTop_toTopOf="@+id/topBackground"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintBottom_toBottomOf="@+id/topBackground"
+        tools:text="00:50" />
+
+    <View
+        android:id="@+id/topBackgroundView"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:alpha="0.6"
+        android:background="@drawable/toolbar_shadow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBackground" />
+
     <com.word.search.puzzle.play.ui.game.WSLayout
         android:id="@+id/gameBoard"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintVertical_weight="1"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/wordsList"/>
+        app:layout_constraintTop_toBottomOf="@+id/topBackground"/>
+
+    <View
+        android:id="@+id/bottomBackgroundView"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:alpha="0.6"
+        android:background="@drawable/toolbar_inverted"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBackground" />
+
+    <View
+        android:id="@+id/bottomBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintTop_toTopOf="@+id/endDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <View
+        android:id="@+id/startDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        android:layout_weight="1"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toTopOf="@+id/header"
+        app:layout_constraintEnd_toStartOf="@+id/header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/header" />
+
+    <TextView
+        android:textAppearance="?attr/textAppearanceBody1"
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="6dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:layout_marginVertical="8dp"
+        android:background="@drawable/background_date"
+        app:layout_constraintTop_toBottomOf="@+id/gameBoard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Words"
+        android:elevation="5dp"/>
+
+    <View
+        android:id="@+id/endDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        android:layout_weight="1"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/header"
+        app:layout_constraintStart_toEndOf="@+id/header"
+        app:layout_constraintBottom_toBottomOf="@+id/header" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wordsList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="true"
-        android:background="@color/colorAccent"
         android:letterSpacing="0.03"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="3"
-        app:layout_constraintVertical_weight="1"
+        app:spanCount="4"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameBoard"
-        tools:itemCount="3"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        tools:itemCount="4"
         tools:listitem="@layout/word_search_item"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

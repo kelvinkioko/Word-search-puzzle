@@ -3,6 +3,7 @@ package com.word.search.puzzle.play.ui.game
 import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
@@ -14,6 +15,7 @@ import com.word.search.puzzle.play.database.WordSearchReader
 import com.word.search.puzzle.play.databinding.FragmentGameBinding
 import com.word.search.puzzle.play.util.viewBinding
 import java.util.Collections
+import java.util.Locale
 import java.util.Random
 import kotlin.math.min
 
@@ -36,6 +38,13 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
     private lateinit var randIndices: IntArray
 
     private lateinit var preferenceHandler: PreferenceHandler
+
+    // Is the stopwatch running?
+    private var seconds: Int = 0
+
+    private val running = true
+
+    private val wasRunning = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -89,6 +98,8 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
             prepareBoard()
             // if (word_list_label_group != null) word_list_label_group.setVisibility(View.VISIBLE)
         }
+
+        runTimer()
     }
 
     private fun prepareBoard() {
@@ -135,7 +146,10 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
                 binding.gameBoard.goal(found)
                 wordAdapter.setWordFound(found)
                 if (ok) {
-                    val mPlayer: MediaPlayer = MediaPlayer.create(requireContext(), R.raw.word_found)
+                    val mPlayer: MediaPlayer = MediaPlayer.create(
+                        requireContext(),
+                        R.raw.word_found
+                    )
                     mPlayer.start()
                 }
                 break
@@ -354,5 +368,33 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
                 board[i][j] = c
             }
         }
+    }
+
+    private fun runTimer() {
+        // Creates a new Handler
+        val handler = Handler()
+        handler.post(object : Runnable {
+            override fun run() {
+                val minutes: Int = seconds % 3600 / 60
+                val secs: Int = seconds % 60
+
+                // Format the seconds into hours, minutes,
+                // and seconds.
+                val time: String = String.format(Locale.getDefault(), "%02d:%02d", minutes, secs)
+
+                // Set the text view text.
+                binding.timer.text = time
+
+                // If running is true, increment the
+                // seconds variable.
+                if (running) {
+                    seconds++
+                }
+
+                // Post the code again
+                // with a delay of 1 second.
+                handler.postDelayed(this, 1000)
+            }
+        })
     }
 }

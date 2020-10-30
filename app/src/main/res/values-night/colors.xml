@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#2d2d2d</color>
-    <color name="colorPrimaryDark">#2d2d2d</color>
+    <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#2e95ec</color>
-    <color name="colorBackground">#2d2d2d</color>
+    <color name="colorBackground">#121212</color>
 
     <!-- Might need validation from design team  -->
     <color name="statusBarColor">#212121</color>
+
+    <color name="colorSplash">#212121</color>
 
     <!--    Text    -->
     <color name="primary_text">#F7F7F7</color>

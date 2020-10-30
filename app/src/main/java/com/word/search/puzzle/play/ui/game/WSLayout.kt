@@ -20,6 +20,7 @@ import com.word.search.puzzle.play.R
 import com.word.search.puzzle.play.constants.PreferenceHandler
 import com.word.search.puzzle.play.ui.game.Direction.Companion.getDirection
 import java.util.Random
+import kotlin.math.atan2
 import kotlin.math.floor
 import kotlin.math.hypot
 
@@ -46,14 +47,24 @@ class WSLayout : LinearLayout {
     private var preferenceHandler: PreferenceHandler
 
     constructor(context: Context) : super(context) {
-        preferenceHandler = PreferenceHandler(context.getSharedPreferences(PreferenceHandler.PREFS_FILE, Context.MODE_PRIVATE))
+        preferenceHandler = PreferenceHandler(
+            context.getSharedPreferences(
+                PreferenceHandler.PREFS_FILE,
+                Context.MODE_PRIVATE
+            )
+        )
         numColumns = 10
         numRows = 10
         init()
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        preferenceHandler = PreferenceHandler(context.getSharedPreferences(PreferenceHandler.PREFS_FILE, Context.MODE_PRIVATE))
+        preferenceHandler = PreferenceHandler(
+            context.getSharedPreferences(
+                PreferenceHandler.PREFS_FILE,
+                Context.MODE_PRIVATE
+            )
+        )
         numColumns = preferenceHandler.getGridSize()!!.toInt()
         numRows = numColumns
         init()
@@ -61,7 +72,13 @@ class WSLayout : LinearLayout {
 
     private fun clearSelection() {
         if (direction != null && selectionCount != null) {
-            onWordHighlightedListener!!.wordHighlighted(findCoordinatesUnderPencil(direction!!, pencilOffset!!, selectionCount!!))
+            onWordHighlightedListener!!.wordHighlighted(
+                findCoordinatesUnderPencil(
+                    direction!!,
+                    pencilOffset!!,
+                    selectionCount!!
+                )
+            )
         }
         pencilOffset = null
         selectionCount = null
@@ -140,26 +157,26 @@ class WSLayout : LinearLayout {
         } else {
             val xDelta = xPos - pencilOffsetRect!!.centerX()
             val yDelta = (yPos - pencilOffsetRect!!.centerY()) * -1
-            val distance = Math.hypot(xDelta.toDouble(), yDelta.toDouble())
+            val distance = hypot(xDelta.toDouble(), yDelta.toDouble())
             if (isInTouchMode && distance < delta) {
                 return
             }
             val previousDirection = direction
             val previousSteps = selectionCount
-            direction = getDirection(Math.atan2(yDelta.toDouble(), xDelta.toDouble()).toFloat())
-            val stepSize = if (direction!!.isAngle) Math.hypot(colWidth.toDouble(), colWidth.toDouble()).toFloat() else colWidth.toFloat()
+            direction = getDirection(atan2(yDelta.toDouble(), xDelta.toDouble()).toFloat())
+            val stepSize = if (direction!!.isAngle) hypot(colWidth.toDouble(), colWidth.toDouble()).toFloat() else colWidth.toFloat()
             selectionCount = Math.round(distance.toFloat() / stepSize)
             if (selectionCount == 0) {
                 selectionCount = null
             }
             if (direction !== previousDirection || selectionCount !== previousSteps) {
                 val selectedViews = selectedLetters ?: return
-                if (previousWord != null && !previousWord!!.isEmpty()) {
+                if (previousWord != null && previousWord!!.isNotEmpty()) {
                     val oldViews: MutableList<View> = ArrayList(previousWord)
                     oldViews.removeAll(selectedViews)
                 }
                 previousWord = selectedViews
-                if (!selectedViews.isEmpty()) {
+                if (selectedViews.isNotEmpty()) {
                     val endView = selectedViews[selectedViews.size - 1]
                     pencilEndRect = getLetterBounds(endView)
                 }
@@ -188,7 +205,7 @@ class WSLayout : LinearLayout {
                 memory = Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_8888)
             }
             val foundCanvas = Canvas(memory!!)
-            val constColor: Boolean = false
+            val constColor = false
             if (!constColor) {
                 val random = Random()
                 val r = random.nextInt(256)
@@ -219,14 +236,26 @@ class WSLayout : LinearLayout {
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         if (isInEditMode) {
             super.onMeasure(heightMeasureSpec, heightMeasureSpec)
-            setMeasuredDimension(MeasureSpec.getSize(heightMeasureSpec), MeasureSpec.getSize(heightMeasureSpec))
+            setMeasuredDimension(
+                MeasureSpec.getSize(heightMeasureSpec), MeasureSpec.getSize(
+                    heightMeasureSpec
+                )
+            )
         } else {
             if (resources.displayMetrics.widthPixels > resources.displayMetrics.heightPixels) {
                 super.onMeasure(heightMeasureSpec, heightMeasureSpec)
-                setMeasuredDimension(MeasureSpec.getSize(heightMeasureSpec), MeasureSpec.getSize(heightMeasureSpec))
+                setMeasuredDimension(
+                    MeasureSpec.getSize(heightMeasureSpec), MeasureSpec.getSize(
+                        heightMeasureSpec
+                    )
+                )
             } else {
                 super.onMeasure(widthMeasureSpec, widthMeasureSpec)
-                setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(widthMeasureSpec))
+                setMeasuredDimension(
+                    MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(
+                        widthMeasureSpec
+                    )
+                )
             }
         }
         colWidth = (measuredWidth.toFloat() / numColumns.toFloat()).toInt()
@@ -247,7 +276,10 @@ class WSLayout : LinearLayout {
         val distance = hypot(xDelta.toDouble(), yDelta.toDouble())
         superRect.right += distance.toFloat()
         canvas.save()
-        canvas.translate(pencilOffsetRect!!.centerX().toFloat(), pencilOffsetRect!!.centerY().toFloat())
+        canvas.translate(
+            pencilOffsetRect!!.centerX().toFloat(),
+            pencilOffsetRect!!.centerY().toFloat()
+        )
         canvas.rotate(direction!!.angleDegree)
         canvas.drawRoundRect(superRect, pencilRadius, pencilRadius, defaultPaint!!)
         canvas.restore()
@@ -256,14 +288,19 @@ class WSLayout : LinearLayout {
     private fun paintGenericSelection(word: Word, canvas: Canvas, paint: Paint?) {
         val angleStep = hypot(colWidth.toDouble(), colWidth.toDouble()).toFloat()
         val pad = colWidth / 3.2f
-        val distance: Float = (if (word.direction.isAngle) { angleStep } else { (colWidth * (word.text.length - 1)).toFloat() })
+        val firstDistance = if (word.direction.isAngle) { angleStep } else { colWidth }
+        val distance: Float = (firstDistance.toInt() * (word.text.length - 1)).toFloat()
         val superRect = RectF(-pad, -pad, pad, pad)
         superRect.right += distance
         val v = findChildByPosition(word.y * numColumns + word.x)
         val viewRect = getLetterBounds(v)
         val savedColor = word.color
         if (savedColor != 0) {
-            paint!!.setARGB(0xA0, Color.red(savedColor), Color.green(savedColor), Color.blue(savedColor))
+            paint!!.setARGB(
+                0xA0, Color.red(savedColor), Color.green(savedColor), Color.blue(
+                    savedColor
+                )
+            )
         }
         canvas.save()
         canvas.translate(viewRect.centerX().toFloat(), viewRect.centerY().toFloat())
@@ -278,7 +315,11 @@ class WSLayout : LinearLayout {
                 return null
             }
             val views: MutableList<View> = ArrayList()
-            for (position in findCoordinatesUnderPencil(direction!!, pencilOffset!!, selectionCount!!)) {
+            for (position in findCoordinatesUnderPencil(
+                direction!!,
+                pencilOffset!!,
+                selectionCount!!
+            )) {
                 views.add(findChildByPosition(position))
             }
             return views
@@ -295,14 +336,19 @@ class WSLayout : LinearLayout {
     private fun init() {
         setWillNotDraw(false)
         orientation = VERTICAL
-        val lp = LayoutParams(LayoutParams.MATCH_PARENT,
-                LayoutParams.MATCH_PARENT)
+        val lp = LayoutParams(
+            LayoutParams.MATCH_PARENT,
+            LayoutParams.MATCH_PARENT
+        )
         lp.weight = 1.0f
         for (i in 0 until numColumns) {
             val row = LinearLayout(context)
             row.orientation = HORIZONTAL
             for (j in 0 until numColumns) {
-                val view: View = LayoutInflater.from(context).inflate(R.layout.word_search_grid_cell, null)
+                val view: View = LayoutInflater.from(context).inflate(
+                    R.layout.word_search_grid_cell,
+                    null
+                )
                 view.isFocusable = true
                 row.addView(view, lp)
             }
@@ -318,7 +364,7 @@ class WSLayout : LinearLayout {
             true
         }
         gameStatus = GameStatus()
-        val color: Int = 0x0099cc
+        val color = 0x0099cc
         defaultPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         defaultPaint!!.setARGB(0xFF, Color.red(color), Color.green(color), Color.blue(color))
         correctPaint = Paint(Paint.ANTI_ALIAS_FLAG)

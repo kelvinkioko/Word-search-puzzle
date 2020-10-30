@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,107 +7,121 @@
     android:background="@color/colorPrimary"
     tools:context=".ui.HomeFragment">
 
+    <ImageView
+        android:id="@+id/appIcon"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toTopOf="@+id/ratingMessage"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/ic_icon_colored" />
+
     <TextView
-        android:textAppearance="?attr/textAppearanceCaption"
         android:id="@+id/ratingMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:gravity="center"
+        android:includeFontPadding="false"
         android:letterSpacing="0.03"
         android:lineSpacingMultiplier="1.1"
         android:text="Word search is a classic puzzle game designed to exercise your brain. Its available in 6 languages"
+        android:textAppearance="?attr/textAppearanceCaption"
         android:textColor="@color/primary_text"
         android:textColorHint="@color/hint_text"
         android:textSize="14sp"
-        android:layout_marginBottom="16dp"
-        android:includeFontPadding="false"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/playButton"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintBottom_toTopOf="@+id/playButton" />
+        app:layout_constraintTop_toBottomOf="@+id/appIcon"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/playButton"
         style="@style/OutlinesButtonAppearance"
         android:layout_width="150dp"
         android:layout_height="76dp"
-        android:gravity="center"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
-        android:scaleType="centerCrop"
         android:clickable="true"
-        app:srcCompat="@drawable/ic_play_selector"
+        android:gravity="center"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/leaderBoard"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintBottom_toTopOf="@+id/leaderBoard"/>
+        app:srcCompat="@drawable/ic_play_selector" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/leaderBoard"
         style="@style/OutlinesButtonAppearance"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:gravity="center"
-        android:text="Leaderboard"
-        android:textSize="16sp"
-        android:textColor="@color/colorAccent"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="Leaderboard"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/rating"
         app:layout_constraintEnd_toStartOf="@id/settings"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintBottom_toTopOf="@+id/rating"/>
+        app:layout_constraintStart_toStartOf="@id/guidelineStart" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/settings"
         style="@style/AccentColoredButtonAppearance"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:gravity="center"
-        android:text="Settings"
-        android:textSize="16sp"
-        android:textColor="@color/colorWhite"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="Settings"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/ratingShare"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toEndOf="@id/leaderBoard"
-        app:layout_constraintBottom_toTopOf="@+id/ratingShare"/>
+        app:layout_constraintStart_toEndOf="@id/leaderBoard" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/rating"
         style="@style/OutlinesButtonAppearance"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:gravity="center"
-        android:text="Rate app"
-        android:textSize="16sp"
-        android:textColor="@color/colorAccent"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="Rate app"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/appVersion"
         app:layout_constraintEnd_toStartOf="@id/ratingShare"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintBottom_toTopOf="@+id/appVersion"/>
+        app:layout_constraintStart_toStartOf="@id/guidelineStart" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/ratingShare"
         style="@style/AccentColoredButtonAppearance"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:gravity="center"
-        android:text="Share app"
-        android:textSize="16sp"
-        android:textColor="@color/colorWhite"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="Share app"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/appVersion"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toEndOf="@id/rating"
-        app:layout_constraintBottom_toTopOf="@+id/appVersion"/>
+        app:layout_constraintStart_toEndOf="@id/rating" />
 
     <TextView
         android:id="@+id/appVersion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"
