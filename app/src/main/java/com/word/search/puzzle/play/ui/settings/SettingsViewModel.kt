@@ -79,7 +79,9 @@ class SettingsViewModel(private val preferenceHandler: PreferenceHandler, privat
             GridSizeEntity("10x10", "10"),
             GridSizeEntity("11x11", "11"),
             GridSizeEntity("12x12", "12"),
-            GridSizeEntity("13x13", "13")
+            GridSizeEntity("13x13", "13"),
+            GridSizeEntity("14x14", "14"),
+            GridSizeEntity("15x15", "15")
         )
         _uiState.postValue(SettingsUIState.DisplayGridSizes(gridSizes = grids, selectedGridSize = preferenceHandler.getGridSize()!!))
     }

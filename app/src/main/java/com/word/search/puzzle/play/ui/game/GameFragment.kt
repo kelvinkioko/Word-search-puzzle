@@ -187,6 +187,8 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
             }
         }
 
+        binding.header.text = "${foundWords.size}/${solution.size} Words found"
+
         if (foundWords.size == solution.size) {
             puzzleFinished()
         }

@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.word.search.puzzle.play.R
 import com.word.search.puzzle.play.databinding.WordSearchItemBinding
 
 class WordAdapter : RecyclerView.Adapter<WordAdapter.WordCountItemViewHolder>() {
@@ -44,13 +45,14 @@ class WordAdapter : RecyclerView.Adapter<WordAdapter.WordCountItemViewHolder>() 
         fun bind(word: Word) {
             binding.apply {
                 textWord.apply {
-                    println("Adapter ${word.text}")
                     text = word.text
                     if (!correctWords.contains(word)) {
                         typeface = Typeface.DEFAULT_BOLD
+                        setTextColor(textWord.resources.getColor(R.color.primary_text))
                         paintFlags = paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                     } else {
                         typeface = Typeface.DEFAULT
+                        setTextColor(textWord.resources.getColor(R.color.colorPositive))
                         paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                     }
                 }
