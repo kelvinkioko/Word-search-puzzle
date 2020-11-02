@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -253,7 +252,7 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
             wordsList.isEnabled = false
         }
         showLevelCompleteDialog()
-        //gameFinishAnimation()
+        // gameFinishAnimation()
     }
 
     private fun selectWords() {
