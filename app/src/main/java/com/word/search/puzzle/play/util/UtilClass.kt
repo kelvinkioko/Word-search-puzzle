@@ -9,11 +9,11 @@ import com.facebook.ads.InterstitialAd
 import com.facebook.ads.InterstitialAdListener
 
 fun setupBannerAdView(context: Context): AdView {
-    return AdView(context, "2623680264372670_4444174165656595", AdSize.BANNER_HEIGHT_50)
+    return AdView(context, "5586492314710123_5586553581370663", AdSize.BANNER_HEIGHT_50)
 }
 
 fun setupInterstitialAdView(context: Context): InterstitialAd {
-    return InterstitialAd(context, "2623680264372670_4445452982195380")
+    return InterstitialAd(context, "5586492314710123_5586498231376198")
 }
 
 fun setupInterstitialListener(interstitialAd: InterstitialAd): InterstitialAdListener {

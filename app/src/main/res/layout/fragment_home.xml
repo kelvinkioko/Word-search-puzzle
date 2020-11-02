@@ -86,7 +86,6 @@
         android:layout_marginBottom="16dp"
         android:gravity="center"
         android:text="Rate app"
-        android:textColor="@color/colorAccent"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/ratingShare"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"

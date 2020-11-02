@@ -5,6 +5,7 @@
     <color name="colorAccent">#00686f</color>
     <color name="colorBackground">#121212</color>
 
+    <color name="homeIcon">#ecf4f3</color>
     <!-- Might need validation from design team  -->
     <color name="statusBarColor">#212121</color>
 

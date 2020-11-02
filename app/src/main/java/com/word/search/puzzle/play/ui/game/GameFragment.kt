@@ -15,12 +15,14 @@ import android.view.animation.Animation
 import android.widget.Button
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.word.search.puzzle.play.R
 import com.word.search.puzzle.play.constants.PreferenceHandler
 import com.word.search.puzzle.play.database.WordSearchReader
 import com.word.search.puzzle.play.databinding.FragmentGameBinding
+import com.word.search.puzzle.play.ui.SharedViewModel
 import com.word.search.puzzle.play.util.viewBinding
 import java.util.Collections
 import java.util.Locale
@@ -49,6 +51,8 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
 
     private lateinit var preferenceHandler: PreferenceHandler
 
+    private lateinit var sharedViewModel: SharedViewModel
+
     // Is the stopwatch running?
     private var handler: Handler? = null
     private var seconds: Int = 0
@@ -66,6 +70,8 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
         super.onViewCreated(view, savedInstanceState)
 
         handler = Handler()
+
+        sharedViewModel = requireActivity().run { ViewModelProvider(this).get(SharedViewModel::class.java) }
 
         preferenceHandler = PreferenceHandler(
             requireContext().getSharedPreferences(
@@ -188,6 +194,10 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
         }
 
         binding.header.text = "${foundWords.size}/${solution.size} Words found"
+
+        if ((solution.size - foundWords.size) == 1) {
+            sharedViewModel.setLoadInterstitial(loadInterstitial = "Prepare")
+        }
 
         if (foundWords.size == solution.size) {
             puzzleFinished()
@@ -545,5 +555,7 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
             viewModel.shareApp(requireActivity())
             dialog.dismiss()
         }
+
+        sharedViewModel.setLoadInterstitial(loadInterstitial = "Show")
     }
 }
