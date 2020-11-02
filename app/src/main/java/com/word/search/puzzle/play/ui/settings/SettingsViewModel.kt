@@ -70,13 +70,16 @@ class SettingsViewModel(private val preferenceHandler: PreferenceHandler, privat
 
     fun populateGridSizes() {
         val grids = mutableListOf(
-                GridSizeEntity("4x4", "4"),
-                GridSizeEntity("5x5", "5"),
-                GridSizeEntity("6x6", "6"),
-                GridSizeEntity("7x7", "7"),
-                GridSizeEntity("8x8", "8"),
-                GridSizeEntity("9x9", "9"),
-                GridSizeEntity("10x10", "10")
+            GridSizeEntity("4x4", "4"),
+            GridSizeEntity("5x5", "5"),
+            GridSizeEntity("6x6", "6"),
+            GridSizeEntity("7x7", "7"),
+            GridSizeEntity("8x8", "8"),
+            GridSizeEntity("9x9", "9"),
+            GridSizeEntity("10x10", "10"),
+            GridSizeEntity("11x11", "11"),
+            GridSizeEntity("12x12", "12"),
+            GridSizeEntity("13x13", "13")
         )
         _uiState.postValue(SettingsUIState.DisplayGridSizes(gridSizes = grids, selectedGridSize = preferenceHandler.getGridSize()!!))
     }

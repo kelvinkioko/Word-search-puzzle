@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:drawable="@drawable/ic_resume_selected" android:state_pressed="true" />
+  <item android:drawable="@drawable/ic_resume" android:state_pressed="false" />
+</selector>
+
+    <!--To use this add the attribute `android:button="@drawable/checkbox_rounded"` to the desired checkbox-->

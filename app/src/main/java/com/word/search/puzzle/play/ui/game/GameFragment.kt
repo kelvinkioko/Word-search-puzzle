@@ -1,14 +1,23 @@
 package com.word.search.puzzle.play.ui.game
 
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
+import android.widget.Button
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.word.search.puzzle.play.R
 import com.word.search.puzzle.play.constants.PreferenceHandler
 import com.word.search.puzzle.play.database.WordSearchReader
@@ -16,8 +25,10 @@ import com.word.search.puzzle.play.databinding.FragmentGameBinding
 import com.word.search.puzzle.play.util.viewBinding
 import java.util.Collections
 import java.util.Locale
+import java.util.Objects
 import java.util.Random
 import kotlin.math.min
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlightedListener {
 
@@ -40,14 +51,22 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
     private lateinit var preferenceHandler: PreferenceHandler
 
     // Is the stopwatch running?
+    private var handler: Handler? = null
     private var seconds: Int = 0
 
-    private val running = true
+    private var running = true
+    private var appPause = false
 
-    private val wasRunning = false
+    private var wasRunning = false
+
+    private lateinit var dialog: Dialog
+
+    private val viewModel: GameViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        handler = Handler()
 
         preferenceHandler = PreferenceHandler(
             requireContext().getSharedPreferences(
@@ -99,7 +118,20 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
             // if (word_list_label_group != null) word_list_label_group.setVisibility(View.VISIBLE)
         }
 
-        runTimer()
+        binding.apply {
+            pauseResumeAction.setOnClickListener {
+                appPause = if (appPause) {
+                    pauseResumeAction.setImageDrawable(VectorDrawableCompat.create(resources, R.drawable.ic_pause_selector, null)!!)
+                    handler?.postDelayed(runnable, 0)
+                    false
+                } else {
+                    pauseResumeAction.setImageDrawable(VectorDrawableCompat.create(resources, R.drawable.ic_resume_selector, null)!!)
+                    handler?.removeCallbacks(runnable)
+                    showPauseDialog()
+                    true
+                }
+            }
+        }
     }
 
     private fun prepareBoard() {
@@ -162,6 +194,7 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
     }
 
     private fun startNewGame() {
+        seconds = 0
         clearBoard()
         randomizeWords()
         prepareBoard()
@@ -219,7 +252,8 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
             gameBoard.isEnabled = false
             wordsList.isEnabled = false
         }
-        gameFinishAnimation()
+        showLevelCompleteDialog()
+        //gameFinishAnimation()
     }
 
     private fun selectWords() {
@@ -370,31 +404,145 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
         }
     }
 
-    private fun runTimer() {
-        // Creates a new Handler
-        val handler = Handler()
-        handler.post(object : Runnable {
-            override fun run() {
-                val minutes: Int = seconds % 3600 / 60
-                val secs: Int = seconds % 60
-
-                // Format the seconds into hours, minutes,
-                // and seconds.
-                val time: String = String.format(Locale.getDefault(), "%02d:%02d", minutes, secs)
-
-                // Set the text view text.
-                binding.timer.text = time
-
-                // If running is true, increment the
-                // seconds variable.
-                if (running) {
-                    seconds++
-                }
-
-                // Post the code again
-                // with a delay of 1 second.
-                handler.postDelayed(this, 1000)
+    private fun handleTimer() {
+        if (!wasRunning && !appPause) {
+            handler?.postDelayed(runnable, 0)
+            wasRunning = true
+        } else if (!appPause) {
+            wasRunning = if (wasRunning) {
+                // TODO: Play pause button
+                handler?.removeCallbacks(runnable)
+                false
+            } else {
+                // TODO: Show pause button
+                handler?.postDelayed(runnable, 0)
+                true
             }
-        })
+        }
+    }
+
+    private var runnable: Runnable = object : Runnable {
+        override fun run() {
+            val minutes: Int = seconds % 3600 / 60
+            val secs: Int = seconds % 60
+
+            // Format the seconds into hours, minutes,
+            // and seconds.
+            val time: String = String.format(Locale.getDefault(), "%02d:%02d", minutes, secs)
+
+            // Set the text view text.
+            binding.timer.text = time
+            println("timer $time")
+
+            // If running is true, increment the
+            // seconds variable.
+            if (running) {
+                seconds++
+            }
+
+            // Post the code again
+            // with a delay of 1 second.
+            handler!!.postDelayed(this, 1000)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handleTimer()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handleTimer()
+    }
+
+    private fun showPauseDialog() {
+        dialog = Dialog(requireContext())
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_paused)
+
+        val window: Window = Objects.requireNonNull<Window>(dialog.window)
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.show()
+
+        val resume: Button = dialog.findViewById(R.id.resume)
+        val restart: Button = dialog.findViewById(R.id.restart)
+        val exit: Button = dialog.findViewById(R.id.exit)
+        val rating: Button = dialog.findViewById(R.id.rating)
+        val share: Button = dialog.findViewById(R.id.share)
+
+        resume.setOnClickListener {
+            binding.apply {
+                appPause = if (appPause) {
+                    pauseResumeAction.setImageDrawable(VectorDrawableCompat.create(resources, R.drawable.ic_pause_selector, null)!!)
+                    handler?.postDelayed(runnable, 0)
+                    false
+                } else {
+                    pauseResumeAction.setImageDrawable(VectorDrawableCompat.create(resources, R.drawable.ic_resume_selector, null)!!)
+                    handler?.removeCallbacks(runnable)
+                    showPauseDialog()
+                    true
+                }
+            }
+            dialog.dismiss()
+        }
+        restart.setOnClickListener {
+            startNewGame()
+            dialog.dismiss()
+        }
+        exit.setOnClickListener {
+            dialog.dismiss()
+            findNavController().navigateUp()
+        }
+        rating.setOnClickListener {
+            viewModel.rateApp(requireActivity())
+            dialog.dismiss()
+        }
+        share.setOnClickListener {
+            viewModel.shareApp(requireActivity())
+            dialog.dismiss()
+        }
+    }
+
+    private fun showLevelCompleteDialog() {
+        dialog = Dialog(requireContext())
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_completed)
+
+        val window: Window = Objects.requireNonNull<Window>(dialog.window)
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        window.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        dialog.show()
+
+        val restart: Button = dialog.findViewById(R.id.restart)
+        val exit: Button = dialog.findViewById(R.id.exit)
+        val rating: Button = dialog.findViewById(R.id.rating)
+        val share: Button = dialog.findViewById(R.id.share)
+
+        restart.setOnClickListener {
+            startNewGame()
+            dialog.dismiss()
+        }
+        exit.setOnClickListener {
+            dialog.dismiss()
+            findNavController().navigateUp()
+        }
+        rating.setOnClickListener {
+            viewModel.rateApp(requireActivity())
+            dialog.dismiss()
+        }
+        share.setOnClickListener {
+            viewModel.shareApp(requireActivity())
+            dialog.dismiss()
+        }
     }
 }

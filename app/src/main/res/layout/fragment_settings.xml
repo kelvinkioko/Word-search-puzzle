@@ -10,14 +10,14 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorSplash"
         app:contentInsetLeft="0dp"
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_settings">
+        app:navigationIcon="@drawable/ic_back_arrow">
 
         <TextView
             android:id="@+id/toolbarTitle"
@@ -51,7 +51,7 @@
                 android:focusable="true"
                 app:text="Language"
                 app:subText="Select a language for word search list"
-                app:icon="@drawable/ic_settings"
+                app:icon="@drawable/ic_language"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -74,7 +74,7 @@
                 android:focusable="true"
                 app:text="Grid size"
                 app:subText="Number of rows and columns on the word search grid"
-                app:icon="@drawable/ic_settings"
+                app:icon="@drawable/ic_grid"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/languageSettingView"/>
@@ -97,7 +97,7 @@
                 android:focusable="true"
                 app:text="Random word count"
                 app:subText="Number of random words to select from database"
-                app:icon="@drawable/ic_settings"
+                app:icon="@drawable/ic_words"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/gridSizeView"/>

@@ -27,6 +27,17 @@
         app:layout_constraintStart_toStartOf="@+id/topBackground"
         app:layout_constraintBottom_toBottomOf="@+id/topBackground" />
 
+    <ImageView
+        android:id="@+id/pauseResumeAction"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:scaleType="centerCrop"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_pause_selector"
+        app:layout_constraintTop_toTopOf="@+id/topBackground"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
+        app:layout_constraintBottom_toBottomOf="@+id/topBackground" />
+
     <TextView
         android:textAppearance="?attr/textAppearanceHeadline4"
         android:id="@+id/timer"

@@ -70,17 +70,6 @@ dependencies {
     androidTestImplementation Dependencies.AndroidX.Navigation.test
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
-    implementation(Dependencies.Timber.core)
-
-    api(Dependencies.Jsoup)
-    api(Dependencies.JodaTime)
-
-    //Image Loader Library
-    implementation "com.github.bumptech.glide:glide:4.11.0"
-    annotationProcessor "com.github.bumptech.glide:compiler:4.11.0"
-
-    implementation 'com.google.android.play:core:1.8.2'
-
     implementation 'com.facebook.android:audience-network-sdk:6.1.0'
 
     implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'

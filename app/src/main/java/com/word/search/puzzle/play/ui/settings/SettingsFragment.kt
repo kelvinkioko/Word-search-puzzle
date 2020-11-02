@@ -20,8 +20,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupToolBar()
         setupClickListeners()
         setupObserver()
+    }
+
+    private fun setupToolBar() {
+        binding.apply {
+            toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+        }
     }
 
     private fun setupClickListeners() {
