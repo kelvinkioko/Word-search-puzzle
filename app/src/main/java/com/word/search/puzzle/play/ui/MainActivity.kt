@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         // your code like this to the Google Play your users will not receive ads (you will get a no fill error).
         interstitialAd = setupInterstitialAdView(this)
         // Create listeners for the Interstitial Ad
-        val interstitialAdListener = setupInterstitialListener(interstitialAd!!)
+        val interstitialAdListener = setupInterstitialListener(interstitialAd!!, sharedViewModel)
 
         // For auto play video ads, it's recommended to load the ad at least 30 seconds before it is shown
         interstitialAd?.loadAd(interstitialAd?.buildLoadAdConfig()!!.withAdListener(interstitialAdListener).build())

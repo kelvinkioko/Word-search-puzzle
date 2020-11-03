@@ -195,7 +195,7 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
 
         binding.header.text = "${foundWords.size}/${solution.size} Words found"
 
-        if ((solution.size - foundWords.size) == 1) {
+        if ((solution.size - foundWords.size) == 2) {
             sharedViewModel.setLoadInterstitial(loadInterstitial = "Prepare")
         }
 

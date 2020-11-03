@@ -7,16 +7,17 @@ import com.facebook.ads.AdSize
 import com.facebook.ads.AdView
 import com.facebook.ads.InterstitialAd
 import com.facebook.ads.InterstitialAdListener
+import com.word.search.puzzle.play.ui.SharedViewModel
 
 fun setupBannerAdView(context: Context): AdView {
     return AdView(context, "5586492314710123_5586553581370663", AdSize.BANNER_HEIGHT_50)
 }
 
 fun setupInterstitialAdView(context: Context): InterstitialAd {
-    return InterstitialAd(context, "5586492314710123_5586498231376198")
+    return InterstitialAd(context, "5586492314710123_5589544011071620")
 }
 
-fun setupInterstitialListener(interstitialAd: InterstitialAd): InterstitialAdListener {
+fun setupInterstitialListener(interstitialAd: InterstitialAd, sharedViewModel: SharedViewModel): InterstitialAdListener {
     return object : InterstitialAdListener {
         override fun onInterstitialDisplayed(ad: Ad) {
             // Interstitial ad displayed callback
@@ -37,7 +38,9 @@ fun setupInterstitialListener(interstitialAd: InterstitialAd): InterstitialAdLis
             // Interstitial ad is loaded and ready to be displayed
             println("Interstitial ad is loaded and ready to be displayed!")
             // Show the ad
-            // interstitialAd.show()
+            if (sharedViewModel.loadInterstitial.value.toString().equals("Show", ignoreCase = true)) {
+                interstitialAd.show()
+            }
         }
 
         override fun onAdClicked(ad: Ad) {

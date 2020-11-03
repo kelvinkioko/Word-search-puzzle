@@ -5,12 +5,6 @@ import androidx.lifecycle.ViewModel
 
 class SharedViewModel : ViewModel() {
 
-    val sharedTwitterLink = MutableLiveData<Any>()
-
-    fun setSharedTwitterLink(sharedTwitterLink: String) {
-        this.sharedTwitterLink.value = sharedTwitterLink
-    }
-
     val loadInterstitial = MutableLiveData<Any>()
 
     fun setLoadInterstitial(loadInterstitial: String) {
