@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,102 +9,83 @@
     tools:context=".ui.HomeFragment">
 
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="matrix"
-        app:srcCompat="@drawable/ic_background"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <ImageView
         android:id="@+id/appIcon"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        app:layout_constraintBottom_toTopOf="@+id/ratingMessage"
+        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintBottom_toBottomOf="@+id/appVersion"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
         app:srcCompat="@drawable/ic_icon_colored" />
 
-    <TextView
-        android:id="@+id/ratingMessage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:letterSpacing="0.03"
-        android:lineSpacingMultiplier="1.1"
-        android:text="Word search is a classic puzzle game designed to exercise your brain. Its available in 6 languages"
-        android:textAppearance="?attr/textAppearanceBody1"
-        android:textColor="@color/primary_text"
-        android:textColorHint="@color/hint_text"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/playButton"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintTop_toBottomOf="@+id/appIcon"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/playButton"
         style="@style/OutlinesButtonAppearance"
-        android:layout_width="150dp"
-        android:layout_height="76dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginHorizontal="32dp"
+        android:gravity="center"
+        android:text="New Game"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/appIcon"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+
+    <com.word.search.puzzle.play.widget.BottomActionItem
+        android:id="@+id/languageSetting"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:clickable="true"
-        android:gravity="center"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/settings"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:srcCompat="@drawable/ic_play_selector" />
+        android:focusable="true"
+        android:layout_marginTop="24dp"
+        app:text="Language"
+        app:icon="@drawable/ic_language"
+        app:layout_constraintTop_toBottomOf="@+id/playButton"
+        app:layout_constraintEnd_toStartOf="@+id/gridSetting"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/settings"
-        style="@style/AccentColoredButtonAppearance"
+    <com.word.search.puzzle.play.widget.BottomActionItem
+        android:id="@+id/gridSetting"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:text="Settings"
-        android:textColor="@color/colorWhite"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/rating"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="24dp"
+        app:text="Grid size"
+        app:icon="@drawable/ic_grid"
+        app:layout_constraintTop_toBottomOf="@+id/playButton"
+        app:layout_constraintEnd_toStartOf="@+id/rateApp"
+        app:layout_constraintStart_toEndOf="@+id/languageSetting"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/rating"
-        style="@style/OutlinesButtonAppearance"
+    <com.word.search.puzzle.play.widget.BottomActionItem
+        android:id="@+id/rateApp"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:text="Rate app"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/ratingShare"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="24dp"
+        app:text="Rate app"
+        app:subText="@string/review_message"
+        app:icon="@drawable/ic_like"
+        app:layout_constraintTop_toBottomOf="@+id/playButton"
+        app:layout_constraintEnd_toStartOf="@+id/shareApp"
+        app:layout_constraintStart_toEndOf="@+id/gridSetting"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/ratingShare"
-        style="@style/AccentColoredButtonAppearance"
+    <com.word.search.puzzle.play.widget.BottomActionItem
+        android:id="@+id/shareApp"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:text="Share app"
-        android:textColor="@color/colorWhite"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/appVersion"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="24dp"
+        app:text="Share app"
+        app:subText="Help us grow by sharing the app to friends who might like it"
+        app:icon="@drawable/ic_invitation"
+        app:layout_constraintTop_toBottomOf="@+id/playButton"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+        app:layout_constraintStart_toEndOf="@+id/rateApp"/>
 
     <TextView
         android:id="@+id/appVersion"

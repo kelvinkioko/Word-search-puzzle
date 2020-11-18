@@ -26,17 +26,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 findNavController().navigate(HomeFragmentDirections.toGameFragment())
             }
 
-            settings.setOnClickListener {
-                findNavController().navigate(HomeFragmentDirections.toSettingsFragment())
-            }
-
-            rating.setOnClickListener {
-                viewModel.rateApp(requireActivity())
-            }
-
-            ratingShare.setOnClickListener {
-                viewModel.shareApp(requireActivity())
-            }
+//            settings.setOnClickListener {
+//                findNavController().navigate(HomeFragmentDirections.toSettingsFragment())
+//            }
+//
+//            rating.setOnClickListener {
+//                viewModel.rateApp(requireActivity())
+//            }
+//
+//            ratingShare.setOnClickListener {
+//                viewModel.shareApp(requireActivity())
+//            }
         }
     }
 }
