@@ -18,34 +18,26 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/ic_background"
-        app:layout_constraintTop_toTopOf="@+id/topBackground"
-        app:layout_constraintEnd_toEndOf="@+id/topBackground"
-        app:layout_constraintStart_toStartOf="@+id/topBackground"
-        app:layout_constraintBottom_toBottomOf="@+id/topBackground" />
-
-    <ImageView
         android:id="@+id/pauseResumeAction"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleType="centerCrop"
         android:clickable="true"
-        app:srcCompat="@drawable/ic_pause_selector"
+        android:padding="10dp"
+        app:srcCompat="@drawable/ic_pause"
         app:layout_constraintTop_toTopOf="@+id/topBackground"
         app:layout_constraintEnd_toEndOf="@+id/guidelineEnd"
         app:layout_constraintBottom_toBottomOf="@+id/topBackground" />
 
     <TextView
-        android:textAppearance="?attr/textAppearanceHeadline4"
+        android:textAppearance="?attr/textAppearanceBody1"
         android:id="@+id/timer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:letterSpacing="0.03"
         android:lineSpacingMultiplier="1.1"
+        android:textSize="22sp"
         android:textColor="@color/primary_text"
         android:textColorHint="@color/hint_text"
         android:includeFontPadding="false"

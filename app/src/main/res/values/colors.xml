@@ -2,11 +2,12 @@
 <resources>
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#ffffff</color>
-    <color name="colorAccent">#00686f</color>
+    <color name="colorAccent">#57855e</color>
     <color name="colorBackground">#ffffff</color>
 
-    <color name="homeIcon">#00686f</color>
-    <color name="colorSplash">#00686f</color>
+    <color name="puzzleColor">#57855e</color>
+    <color name="homeIcon">#57855e</color>
+    <color name="colorSplash">#57855e</color>
 
     <color name="colorWhite">#ffffff</color>
 
@@ -17,7 +18,7 @@
 
     <color name="divider">#50aeb0a5</color>
 
-    <color name="statusBarColor">#00686f</color>
+    <color name="statusBarColor">#57855e</color>
 
     <!--    State colors    -->
     <color name="colorPositive">#38aba5</color>

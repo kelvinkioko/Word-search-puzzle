@@ -25,6 +25,7 @@ class GridSizeFragment : Fragment(R.layout.settings_preference_chooser_fragment)
 
     private fun onGridSizePicked(gridSizeEntity: GridSizeEntity) {
         viewModel.setChosenGridSize(gridSize = gridSizeEntity.grid_value)
+        findNavController().navigateUp()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

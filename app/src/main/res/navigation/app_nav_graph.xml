@@ -17,6 +17,12 @@
         <action
             android:id="@+id/toGameFragment"
             app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/toLanguagesFragment"
+            app:destination="@id/languagesFragment" />
+        <action
+            android:id="@+id/toGridSizeFragment"
+            app:destination="@id/gridSizesFragment" />
     </fragment>
 
     <fragment

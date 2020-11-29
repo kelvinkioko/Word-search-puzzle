@@ -17,14 +17,14 @@
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_icon_colored" />
+        app:srcCompat="@drawable/home_icon" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/playButton"
         style="@style/OutlinesButtonAppearance"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:layout_marginHorizontal="32dp"
         android:gravity="center"
         android:text="New Game"

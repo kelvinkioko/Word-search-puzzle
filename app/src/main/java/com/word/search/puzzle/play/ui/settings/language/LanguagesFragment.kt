@@ -25,6 +25,7 @@ class LanguagesFragment : Fragment(R.layout.settings_preference_chooser_fragment
 
     private fun onLanguagePicked(languageEntity: LanguageEntity) {
         viewModel.setLanguage(language = languageEntity.initial)
+        findNavController().navigateUp()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

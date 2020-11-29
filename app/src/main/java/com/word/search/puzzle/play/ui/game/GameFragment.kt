@@ -24,6 +24,7 @@ import com.word.search.puzzle.play.database.WordSearchReader
 import com.word.search.puzzle.play.databinding.FragmentGameBinding
 import com.word.search.puzzle.play.ui.SharedViewModel
 import com.word.search.puzzle.play.util.viewBinding
+import com.word.search.puzzle.play.widget.MenuActionItem
 import java.util.Collections
 import java.util.Locale
 import java.util.Objects
@@ -126,11 +127,11 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
         binding.apply {
             pauseResumeAction.setOnClickListener {
                 appPause = if (appPause) {
-                    pauseResumeAction.setImageDrawable(VectorDrawableCompat.create(resources, R.drawable.ic_pause_selector, null)!!)
+                    pauseResumeAction.setImageDrawable(VectorDrawableCompat.create(resources, R.drawable.ic_pause, null)!!)
                     handler?.postDelayed(runnable, 0)
                     false
                 } else {
-                    pauseResumeAction.setImageDrawable(VectorDrawableCompat.create(resources, R.drawable.ic_resume_selector, null)!!)
+                    pauseResumeAction.setImageDrawable(VectorDrawableCompat.create(resources, R.drawable.ic_resume, null)!!)
                     handler?.removeCallbacks(runnable)
                     showPauseDialog()
                     true
@@ -443,7 +444,6 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
 
             // Set the text view text.
             binding.timer.text = time
-            println("timer $time")
 
             // If running is true, increment the
             // seconds variable.
@@ -484,17 +484,17 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
         val resume: Button = dialog.findViewById(R.id.resume)
         val restart: Button = dialog.findViewById(R.id.restart)
         val exit: Button = dialog.findViewById(R.id.exit)
-        val rating: Button = dialog.findViewById(R.id.rating)
-        val share: Button = dialog.findViewById(R.id.share)
+        val rating: MenuActionItem = dialog.findViewById(R.id.rating)
+        val share: MenuActionItem = dialog.findViewById(R.id.share)
 
         resume.setOnClickListener {
             binding.apply {
                 appPause = if (appPause) {
-                    pauseResumeAction.setImageDrawable(VectorDrawableCompat.create(resources, R.drawable.ic_pause_selector, null)!!)
+                    pauseResumeAction.setImageDrawable(VectorDrawableCompat.create(resources, R.drawable.ic_pause, null)!!)
                     handler?.postDelayed(runnable, 0)
                     false
                 } else {
-                    pauseResumeAction.setImageDrawable(VectorDrawableCompat.create(resources, R.drawable.ic_resume_selector, null)!!)
+                    pauseResumeAction.setImageDrawable(VectorDrawableCompat.create(resources, R.drawable.ic_resume, null)!!)
                     handler?.removeCallbacks(runnable)
                     showPauseDialog()
                     true
@@ -536,8 +536,8 @@ class GameFragment : Fragment(R.layout.fragment_game), WSLayout.OnWordHighlighte
 
         val restart: Button = dialog.findViewById(R.id.restart)
         val exit: Button = dialog.findViewById(R.id.exit)
-        val rating: Button = dialog.findViewById(R.id.rating)
-        val share: Button = dialog.findViewById(R.id.share)
+        val rating: MenuActionItem = dialog.findViewById(R.id.rating)
+        val share: MenuActionItem = dialog.findViewById(R.id.share)
 
         restart.setOnClickListener {
             startNewGame()
